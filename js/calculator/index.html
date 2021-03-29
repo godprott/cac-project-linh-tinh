@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Calculator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+      </head>
+<body>
+
+<div class="jumbotron text-center">
+<h1>Calculator</h1>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-8">
+            <input type="text" readonly id="myinput" class="form-control" style="text-align:right">
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-secondary btn-block" onclick="getValue('+')">+</button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-secondary btn-block" onclick="getValue('-')">-</button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-secondary btn-block" onclick="getValue('*')">x</button>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" class="btn btn-secondary btn-block" onclick="getValue('/')">/</button>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(7)">7</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(8)">8</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(9)">9</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(4)">4</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(5)">5</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(6)">6</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(1)">1</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(2)">2</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(3)">3</button>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue(0)">0</button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue('.')"><strong>.</strong></button>
+                </div>
+                <div class="col-sm-4">
+                    <button type="button" class="btn btn-outline-primary btn-block" onclick="getValue('C')">C</button>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-2">
+            <button type="button" ir="rtl" class="btn btn-primary w-100 h-100" onclick="getResurt()">=</button>
+        </div>
+    </div>
+</div>
+
+
+<script>
+    var data = document.getElementById("myinput");
+    function getValue(character) {
+        if(character === 'C') {
+            data.value = "";
+        }
+        else {
+            if(data.value != "" || !isNaN(character) || character === '-') { // nhap ki tu vao dau tien phai la number hoac -
+                var check = data.value.replace(/[0-9]/g, '');
+                if(character !== '.' || check.slice(check.length-1) !== '.') { // ko co 2 ki tu . gan nhau
+                    if(!(data.value.length == 1 && data.value.slice(data.value.length-1) === '-' && isNaN(character))) { // ko xet th - dau tien
+                      if(isNaN(character) && isNaN(data.value.slice(data.value.length-1))) // neu ki tu nhap vao la 1 ky tu ma truoc do cx la 1 ki tu thi thay the
+                        {
+                            data.value = data.value.slice(0,-1);
+                            data.value += character;
+                        }
+                        else {
+                            data.value += character;
+                        }
+                    }
+                }
+            }
+        }        
+    }
+
+    function getResurt() {
+      //  data.value = data.value.replace(/[^-()\d/*+.]/g, ''); // xu ly ki tu de dam bao bao mat nhung ko tinh toan dung dc
+        var lastChar = data.value.slice(data.value.length-1);
+        if(isNaN(lastChar) && lastChar !== '.') {
+            data.value += '0';
+        }
+        data.value = eval(data.value);            
+    }   
+</script>
+
+</body>
+</html>

@@ -1,0 +1,14 @@
+.users
+  table
+    thead
+      tr
+        th  Name 
+        th  Email 
+    tbody
+    each user in userData
+      tr
+        td= user.name
+        td= user.email
+        td
+          a(href="/info/" + user.name) More
+  

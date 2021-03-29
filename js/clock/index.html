@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h1>Clock</h1>
+
+<h2 id="demo"></h2>
+
+
+<script>
+    var time = document.getElementById("demo");
+    var getTime;
+    var hour;
+    var min;
+    var sec;
+    var timechange = ["AM","PM"];
+
+    setInterval(run, 900);
+
+    function run() {
+        getTime = new Date();
+        hour = getTime.getHours();
+        min = getTime.getMinutes();
+        sec = getTime.getSeconds();
+        if(hour == 12) {
+            time.innerHTML = hour + ":" + format(min) + ":" + format(sec) + " " + timechange[1];
+        }
+
+        if(hour > 12) {
+            time.innerHTML = format(hour-12) + ":" + format(min) + ":" + format(sec) + " " + timechange[1];
+        }
+
+        if(hour < 12) {
+            time.innerHTML = format(hour) + ":" + format(min) + ":" + format(sec) + " " + timechange[0];
+        }
+    }
+
+    function format(value) {
+        if( value < 10 ) {
+            return '0' + value; 
+        }
+        return value;
+    }
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>ToDo List</h2>
+
+<p><%= msg %></p>
+<p id="msgClient"></p>
+
+<form action="/add" method="POST" >
+    <label for="task">Task:</label>
+    <input type="text" name="task" required><br><br>
+    <input type="submit" value="Add">
+</form> 
+<br>
+<table style="width:50%">
+  <tr>
+    <th>Task</th> 
+  </tr>
+  <% taskData.forEach((task) => { %>
+    <tr>
+        <% if (task.is_active) { %>
+            <td> <input type="checkbox" id="checkBox<%= task.id %>" onclick="changeState(<%= task.id %>)" checked></td>
+        <% } else { %>
+            <td> <input type="checkbox" id="checkBox<%= task.id %>" onclick="changeState(<%= task.id %>)"></td>
+        <%  } %>
+        <td> <input type="text" id="taskName<%= task.id %>" name="task" value="<%= task.name %>" required> </td>
+        <td><button onclick="updateTask(<%= task.id %>)">Update</button></td>
+        <td><a href=<%= "/delete/" + task.id %>>Delete</a></td>
+    </tr>
+  <% }); %>
+</table>
+
+<script>
+    const changeState = (id) => {
+        let checkbox = document.getElementById('checkBox'+id);
+        if(checkbox.checked) {
+            location.href = "/active/" + id + "?checked=true";
+        }
+        else {
+            location.href = "/active/" + id + "?checked=false";
+        }
+    }
+
+    const updateTask = (id) => {
+        let taskName = document.getElementById('taskName'+id);
+        console.log(taskName.value);
+        if(taskName.value) {
+          location.href = "/update/" + id + "?name=" + taskName.value;
+        }
+        else {
+            document.getElementById('msgClient').innerHTML = "Nhap thi moi update dc";
+        }
+    }
+</script>
+</body>
+</html>

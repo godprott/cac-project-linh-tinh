@@ -1,0 +1,19 @@
+form.seach-form(action="/info/search")
+  input(name="name", type="text", placeholder="name")
+  input(type="submit")
+
+.users 
+  h2 All users
+    if searchData.length > 0
+      table
+        thead
+          tr
+            th  Name 
+            th  Email 
+        tbody
+          each user in searchData
+            tr
+              td=  user.name 
+              td=  user.email
+    else
+      p No user to display

@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Todo List</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <style>
+        .square {
+            height: 150px;
+            width: 150px;
+            background-color: #555;
+        }
+
+        .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.text-large {
+  font-size: 150%;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(2); /* IE */
+  -moz-transform: scale(2); /* FF */
+  -webkit-transform: scale(2); /* Safari and Chrome */
+  -o-transform: scale(2); /* Opera */
+  transform: scale(2);
+  padding: 10px;
+}
+
+/* Might want to wrap a span around your checkbox text */
+.checkboxtext
+{
+  /* Checkbox text */
+  font-size: 110%;
+  display: inline;
+}
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    h2 { color: rgb(25, 25, 107); font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+    </style>
+
+<body>
+    <div class="jumbotron text-center">
+        <h1>Todo List</h1>
+        <input type="text" id="todo" placeholder="Enter a task">
+        <button class="btn btn-primary" id="myBtn" onclick="addTask()">+</button>
+    </div>
+
+    <div class="container"></div>
+
+
+<script>
+    var container = document.getElementsByClassName("container")[0];
+
+    const addTask = () => {
+        var getTask = document.getElementById("todo");
+        if(getTask.value !== '') {
+            var div = document.createElement("div");
+            div.setAttribute("class", "text-center");
+            container.appendChild(div);
+
+            var checkbox = document.createElement("input");
+            checkbox.setAttribute("type", "checkbox");
+            checkbox.addEventListener("click", check);
+
+            var span = document.createElement("span");
+            span.setAttribute("class", "badge badge-info text-large");
+            span.innerHTML = getTask.value;
+
+            var btnDelete = document.createElement("button");
+            btnDelete.setAttribute("class","btn btn-outline-danger");
+            btnDelete.innerHTML = "Delete";
+            btnDelete.addEventListener("click", myDelete);
+
+            div.appendChild(checkbox);
+            div.appendChild(span);
+            div.appendChild(btnDelete);
+
+            getTask.value = '';
+        }
+    }
+
+    function check() {
+        if (this.checked === true) {
+            this.nextSibling.setAttribute("style", "text-decoration-line:line-through");
+        }
+        else {
+            this.nextSibling.removeAttribute("style");
+        }
+    }
+
+    function myDelete() {
+        this.parentNode.remove();
+    }
+
+
+</script>
+
+</body>
+</html>

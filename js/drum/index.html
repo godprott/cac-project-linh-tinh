@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Drum</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <style>
+        h2 { color: #7c795d; font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+    </style>
+<body>
+
+<div class="jumbotron text-center">
+<h1>Drum</h1>
+</div>
+
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-sm-4">
+            <div class="text-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ5UPlK7ydise_3PESJe09-JvpJZad3bxrrA&usqp=CAU" alt="drum 1" width="300" height="350">
+                <h2>S</h2>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="text-center">
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ5UPlK7ydise_3PESJe09-JvpJZad3bxrrA&usqp=CAU" alt="drum 1" width="300" height="350">
+                <h2>K</h2>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+   const scrImg2 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSuHfNOCmYIZ11Sm58XX9wm9gt0LrW9I-a4ow&usqp=CAU";
+   const scrImg1 = "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSZ5UPlK7ydise_3PESJe09-JvpJZad3bxrrA&usqp=CAU"
+    var x = document.querySelectorAll("h2")[0];
+    
+    var myAudio = {
+        audioDrum1: new Audio('drum1.mp3'),
+        audioDrum2: new Audio('drum2.mp3')
+    }
+
+    document.addEventListener("keydown", drumEvent);
+
+    function drumEvent(keycode) {
+        switch (keycode.code) {
+            case "KeyS":
+                audioStop(myAudio.audioDrum1);
+                myAudio.audioDrum1.play();
+                document.images[0].setAttribute("src", scrImg2);
+                document.querySelectorAll("h2")[0].style.color = "blue";
+                break;
+            case "KeyK":
+                audioStop(myAudio.audioDrum2);
+                myAudio.audioDrum2.play();
+                document.images[1].setAttribute("src", scrImg2);
+                document.querySelectorAll("h2")[1].style.color = "blue";
+                break;
+        }
+    }
+    
+    function audioStop(audio) {
+        audio.pause();
+        audio.currentTime = 0;
+    }
+
+    setInterval(controlEnd, 100);
+
+    function controlEnd() {
+        for (audio in myAudio) {
+            if(myAudio[audio].currentTime >= 0.2) {
+                audioStop(myAudio[audio]);
+                var index = Object.keys(myAudio).indexOf(audio);
+                document.images[index].setAttribute("src", scrImg1);
+                document.querySelectorAll("h2")[index].style.color = "black";
+            }
+        }
+    }
+</script>
+
+</body>
+</html>

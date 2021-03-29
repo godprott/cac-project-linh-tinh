@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>stopwatch</h2>
+
+<p id="demo">00:00</p>
+
+<button type="button" onclick='begin()'>Begin</button>
+<button type="button" onclick='stop()'>Stop</button>
+<button type="button" onclick='reset()'>Reset</button>
+
+<script>
+    var x = document.getElementById("demo");
+    var startdate = new Date();
+    var loopFunc;
+    var loopContinute = 0;
+
+    function begin() {
+      if(loopContinute !== 0)
+      {
+        var y = new Date();
+        startdate = Number(startdate) + (Number(y) - Number(loopContinute));
+        loopContinute = 0;
+      }
+      loopFunc = setInterval(beginExc, 1000);
+    }
+    
+    function stop() {
+      loopContinute = new Date();
+      clearInterval(loopFunc);
+    }
+
+    function reset() {
+        startdate = new Date();
+        x.innerHTML = "00:00";
+        clearInterval(loopFunc);
+    }
+
+    function beginExc() {        
+        var resurt = {};
+        var currentdate;
+        currentdate = new Date();
+
+        resurt.diff = Number(currentdate) - Number(startdate);
+        if(resurt.diff >= 60000)
+        {
+            resurt.min = Math.floor(resurt.diff/60000);
+            resurt.sec = Math.floor((resurt.diff - resurt.min*60000)/1000);
+
+            if(resurt.min < 10)
+            {
+                resurt.min = '0' + resurt.min;
+            }
+            if(resurt.sec < 10)
+            {
+                resurt.sec = '0' + resurt.sec;
+            }
+        }
+        else
+        {
+            resurt.min = "00";
+            resurt.sec = Math.floor(resurt.diff/1000);
+            if(resurt.sec < 10)
+            {
+                resurt.sec = '0' + resurt.sec;
+            }
+        }
+        x.innerHTML = resurt.min + ":" + resurt.sec;
+    }
+</script>
+
+</body>
+</html>

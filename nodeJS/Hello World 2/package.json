@@ -1,0 +1,25 @@
+{
+  "name": "hello_world_2",
+  "version": "1.0.0",
+  "description": "thu express",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "helloworld",
+    "express",
+    "nodejs"
+  ],
+  "author": "Dep Trai Boy",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "pub": "^0.2.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6",
+    "pug": "^3.0.0"
+  }
+}

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Book Directory</h2>
+
+<table style="width:70%">
+  <tr>
+    <th>ID</th>
+    <th>Name</th> 
+  </tr>
+  <% bookData.forEach((book) => { %>
+    <tr>
+        <td> <%= book.id %> </td>
+        <td> <%= book.name %> </td>
+        <td><a href=<%= "/info/" + book.id %>>More Info</a></td>
+        <td><a href=<%= "/delete/" + book.id %>>Delete</a></td>
+    </tr>
+  <% }); %>
+</table>
+<br>
+<input type="submit" value="Add More Book" onclick="window.location='/create'" />
+
+</body>
+</html>

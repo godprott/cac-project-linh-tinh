@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Book Info</h2>
+<p><%= msg %></p>
+
+<form action="/update" method="POST" >
+    <label for="id">ID:</label><br>
+    <input type="text" name="id" value="<%= book.id %>" readonly><br>
+    <label for="name">Name:</label><br>
+    <input type="text" id="name" name="name" value="<%= book.name %>" required><br>
+    <label for="des">Des:</label><br>
+    <input type="text" id="des" name="des" value="<%= book.des %>" required><br><br>
+    <input type="submit" value="Update">
+</form> 
+<br>
+<input type="submit" value="Back" onclick="window.location='/'" />
+
+
+</body>
+</html>

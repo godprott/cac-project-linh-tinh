@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Tip Calculator</title>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    </head>
+    <style>
+        .square {
+            height: 150px;
+            width: 150px;
+            background-color: #555;
+        }
+
+        .switch {
+  position: relative;
+  display: inline-block;
+  width: 60px;
+  height: 34px;
+}
+
+.switch input { 
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: #ccc;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+.slider:before {
+  position: absolute;
+  content: "";
+  height: 26px;
+  width: 26px;
+  left: 4px;
+  bottom: 4px;
+  background-color: white;
+  -webkit-transition: .4s;
+  transition: .4s;
+}
+
+input:checked + .slider {
+  background-color: #2196F3;
+}
+
+input:focus + .slider {
+  box-shadow: 0 0 1px #2196F3;
+}
+
+input:checked + .slider:before {
+  -webkit-transform: translateX(26px);
+  -ms-transform: translateX(26px);
+  transform: translateX(26px);
+}
+
+/* Rounded sliders */
+.slider.round {
+  border-radius: 34px;
+}
+
+.slider.round:before {
+  border-radius: 50%;
+}
+    h2 { color: rgb(25, 25, 107); font-family: 'Trocchi', serif; font-size: 45px; font-weight: normal; line-height: 48px; margin: 0; }
+    </style>
+
+<body>
+    <div class="jumbotron text-center">
+        <h1>Tip Calculator</h1>
+        <label for="monney">Input</label>
+        <input type="number" id="monney" min="0" oninput="calculator()">
+        <br>
+        <label for="tip">Tip</label>
+        <input type="range" id="tip" min="0" max="100" value="0" onchange="calculator()">
+        <span id="tipOutput">%</span>
+    </div>
+
+    <div class="container">
+        <div class="text-center">
+        <h1>Results</h1>
+        <label for="amount">Tip amount</label>
+        <input type="number" id="amount" disabled>
+        <span>$</span>
+        <br>
+        <label for="total">Total Bill with Tip</label>
+        <input type="number" id="total" disabled>
+        <span>$</span>
+        </div>
+    </div>
+
+
+<script>
+    var monney = document.getElementById("monney");
+    var tip = document.getElementById("tip");
+    var tipAmount = document.getElementById("amount");
+    var total = document.getElementById("total");
+    var tipOutput = document.getElementById("tipOutput");
+
+    const calculator = () => {
+        monney.value = (monney.value == '') ? 0:monney.value;
+        tipOutput.innerHTML = tip.value + "%";
+        tipAmount.value = (monney.value * tip.value)/100;
+        total.value = Number(monney.value) + Number(tipAmount.value);
+    }
+</script>
+
+</body>
+</html>

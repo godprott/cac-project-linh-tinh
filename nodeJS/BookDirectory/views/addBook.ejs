@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+<body>
+
+<h2>Add Book</h2>
+
+<form action="/create" method="POST" >
+    <label for="id">ID:</label><br>
+    <input type="text" name="id" value="<%= newId %>" readonly><br>
+    <label for="name">Name:</label><br>
+    <input type="text" name="name" required><br>
+    <label for="des">Des:</label><br>
+    <input type="text" name="des" required><br><br>
+    <input type="submit" value="Add">
+</form> 
+<br>
+<input type="submit" value="Back" onclick="window.location='/'" />
+
+</body>
+</html>
